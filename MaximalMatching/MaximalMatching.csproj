@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Bfs.cs" />
     <Compile Include="CreateDirectGraph.cs" />
+    <Compile Include="ExtensionPath.cs" />
     <Compile Include="InitialMatching.cs" />
     <Compile Include="MatchingModel.cs" />
     <Compile Include="MaximalMatchingHelpers.cs" />

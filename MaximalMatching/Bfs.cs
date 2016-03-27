@@ -6,20 +6,18 @@
 
     public class Bfs
     {
-        private readonly int[,] graph;
 
         private Queue<int> neighbors;
 
         private Queue<Tuple<int,int>> path; 
 
-        public Bfs(int[,] graph)
+        public Bfs()
         {
-            this.graph = graph;
             neighbors = new Queue<int>();
             path = new Queue<Tuple<int,int>>();
         }
 
-        public Queue<Tuple<int,int>> FindPath(int startVertex)
+        public Queue<Tuple<int,int>> FindPath(int startVertex, int[,] graph)
         {
             neighbors.Enqueue(startVertex);
             do

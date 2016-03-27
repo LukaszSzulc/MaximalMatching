@@ -41,8 +41,9 @@
             var elementAdjust = new CreateDirectGraph(result.Graph);
             var directedGraph = elementAdjust.AdjustGraphVertexDirection();
 
-            var bfsPath = new Bfs(directedGraph);
-            var path = bfsPath.FindPath(result.FreeVertexes.First()).ToList();
+            
+            var extensionPath = new ExtensionPath();
+            var path = extensionPath.GetLongestExtensionPath(directedGraph, result.FreeVertexes);
 
             MaximalMatchingHelpers.RemovePreviousMatching(directedGraph,path);
             MaximalMatchingHelpers.RemoveEdges(directedGraph,path);
