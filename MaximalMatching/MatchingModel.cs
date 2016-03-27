@@ -15,7 +15,7 @@
 
         public List<int> FreeVertexes { get; set; } 
 
-        public int[][] Graph { get; set; }
+        public int[,] Graph { get; set; }
 
         public bool IsMatchComplete { get; set; }
     }

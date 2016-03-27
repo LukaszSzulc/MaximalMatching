@@ -7,13 +7,13 @@ namespace MaximalMatching
 
     public class InitialMatching
     {
-        private int[][] _graph;
+        private int[,] _graph;
 
         private List<int> _freeVertexes;
 
         private List<Tuple<int, int>> _matching;  
 
-        public InitialMatching(int[][] graph)
+        public InitialMatching(int[,] graph)
         {
             _graph = graph;
             _freeVertexes = new List<int>();
@@ -24,9 +24,9 @@ namespace MaximalMatching
         {
             CreateInitialFreeVertexList();
 
-            for (var vertex = 0; vertex < _graph.Length; vertex++)
+            for (var vertex = 0; vertex < _graph.GetLength(0); vertex++)
             {
-                for (var neighbour = 0; neighbour < _graph[vertex].Length; neighbour++)
+                for (var neighbour = 0; neighbour < _graph.GetLength(1); neighbour++)
                 {
                     if (ConnectionExists(vertex, neighbour))
                     {
@@ -52,13 +52,20 @@ namespace MaximalMatching
 
         private void IncrementValuesInMatrix(int vertex, int neighbour)
         {
-            _graph[vertex][neighbour]++;
-            _graph[neighbour][vertex]++;
+            if ( vertex < _graph.GetLength(0) && neighbour < _graph.GetLength(1))
+            {
+                _graph[vertex, neighbour]++;
+            }
+
+            if (neighbour < _graph.GetLength(0) && vertex < _graph.GetLength(1) && neighbour != vertex)
+            {
+                _graph[neighbour, vertex]++;
+            }
         }
 
         private bool ConnectionExists(int vertex, int neighbour)
         {
-            return _graph[vertex][neighbour] == 1;
+            return _graph[vertex,neighbour] == 1;
         }
 
         private void CreateMatchBeetweenVertxes(int startVertex, int endVertex)
@@ -83,7 +90,7 @@ namespace MaximalMatching
 
         private void CreateInitialFreeVertexList()
         {
-            for (var i = 0; i < _graph.Length; i++)
+            for (var i = 0; i < _graph.GetLength(0); i++)
             {
                 _freeVertexes.Add(i);
             }
