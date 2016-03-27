@@ -5,7 +5,6 @@ namespace MaximalMatching
 {
     public static class MaximalMatchingHelpers
     {
-
         public static void RemovePreviousMatching(int[,] graph, List<Tuple<int, int>> vertexes)
         {
             for (int i = 1; i < vertexes.Count; i += 2)

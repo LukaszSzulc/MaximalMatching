@@ -34,22 +34,12 @@
         public void Test()
         {
             var graph = CreateGraph();
+            var countMatch = CountMatching(graph);
 
-            var initialMatchin = new InitialMatching(graph);
-            var result = initialMatchin.FindInitialMatching();
-            
-            var elementAdjust = new CreateDirectGraph(result.Graph);
-            var directedGraph = elementAdjust.AdjustGraphVertexDirection();
+            var graphWithMaximalMatch = new GraphMaximalMatching().FindMaximalMatchingInGraph(graph);
 
-            
-            var extensionPath = new ExtensionPath();
-            var path = extensionPath.GetLongestExtensionPath(directedGraph, result.FreeVertexes);
 
-            MaximalMatchingHelpers.RemovePreviousMatching(directedGraph,path);
-            MaximalMatchingHelpers.RemoveEdges(directedGraph,path);
-            MaximalMatchingHelpers.AddNewMatches(directedGraph,path);
-            MaximalMatchingHelpers.AddNewEdges(directedGraph,path);
-
+            CountMatching(graphWithMaximalMatch).Should().BeGreaterThan(countMatch);
         }
 
         private int[,] CreateGraph()
@@ -66,6 +56,23 @@
 
             var edges = fixture.GetEdges();
             return fixture.CreateGraph(10, 10, edges);
+        }
+
+        private int CountMatching(int[,] graph)
+        {
+            var count = 0;
+            for (int i = 0; i < graph.GetLength(0); i++)
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    if (graph[i, j] == 2)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
         }
 
     }
